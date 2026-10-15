@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10152f">
+  <meta name="description" content="The World of Khalifa — my life, my dreams, my journey with learning and technology, and a meaningful friendship.">
+  <title>The World of Khalifa — My Life, My Dreams, and My Story with Aisha</title>
+  <style>
+    :root {
+      --night: #10152f;
+      --night2: #1b2450;
+      --cream: #fff9f0;
+      --gold: #f4c66a;
+      --pink: #ffb6c8;
+      --mint: #9be4d1;
+      --ink: #202642;
+      --muted: #626984;
+      --white: #ffffff;
+      --glass: rgba(255,255,255,.09);
+      --line: rgba(255,255,255,.16);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--ink); background: var(--cream);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+    }
+    a { color: inherit; }
+    .hero {
+      min-height: 92vh; color: var(--white); overflow: hidden; position: relative;
+      display: flex; align-items: center;
+      background:
+        radial-gradient(circle at 78% 20%, rgba(244,198,106,.28), transparent 23rem),
+        radial-gradient(circle at 15% 85%, rgba(155,228,209,.18), transparent 25rem),
+        linear-gradient(135deg, var(--night), var(--night2));
+      padding: 5.5rem max(1.25rem, calc((100vw - 1120px)/2));
+    }
+    .stars, .stars::before, .stars::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(#fff 1px, transparent 1.5px);
+      background-size: 71px 71px; opacity: .25;
+      mask-image: linear-gradient(to bottom, black, transparent 92%);
+    }
+    .stars::before { background-size: 113px 113px; background-position: 30px 18px; opacity: .65; }
+    .hero-inner { max-width: 850px; position: relative; z-index: 1; animation: rise .9s ease both; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .18em; color: var(--mint); font-size: .78rem; font-weight: 800; }
+    h1 { font-size: clamp(2.7rem, 7vw, 5.8rem); line-height: 1.04; margin: 1rem 0 1.2rem; letter-spacing: -.045em; }
+    h1 span { color: var(--gold); }
+    .hero-subtitle { color: #e6e9ff; font-size: clamp(1.05rem, 2vw, 1.3rem); max-width: 690px; }
+    .hero-actions { display: flex; gap: .8rem; flex-wrap: wrap; margin-top: 2rem; }
+    .button {
+      display: inline-block; border-radius: 999px; padding: .85rem 1.25rem; font-weight: 800;
+      text-decoration: none; transition: transform .2s, background .2s;
+    }
+    .button:hover { transform: translateY(-3px); }
+    .button.primary { background: var(--gold); color: var(--night); }
+    .button.secondary { border: 1px solid var(--line); color: white; background: var(--glass); }
+    .orbit {
+      position: absolute; width: min(40vw, 390px); aspect-ratio: 1; right: 6%; top: 20%;
+      border: 1px solid rgba(255,255,255,.22); border-radius: 50%;
+      box-shadow: 0 0 0 28px rgba(255,255,255,.025), 0 0 0 58px rgba(255,255,255,.02);
+      animation: float 7s ease-in-out infinite;
+    }
+    .orbit::before { content: "🌍"; position: absolute; font-size: clamp(5rem, 12vw, 9rem); top: 24%; left: 26%; filter: drop-shadow(0 12px 30px rgba(0,0,0,.25)); }
+    .orbit::after { content: "✦"; position: absolute; top: 8%; right: 17%; color: var(--gold); font-size: 2rem; }
+    nav {
+      position: sticky; top: 0; z-index: 10; display: flex; justify-content: center; flex-wrap: wrap; gap: .35rem;
+      padding: .75rem 1rem; background: rgba(16,21,47,.94); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    nav a { color: #f7f7ff; text-decoration: none; padding: .45rem .7rem; font-size: .88rem; border-radius: 999px; }
+    nav a:hover { background: rgba(255,255,255,.12); }
+    main { overflow: hidden; }
+    .section { max-width: 1100px; margin: auto; padding: 5rem 1.25rem; }
+    .section.dark { max-width: none; background: var(--night); color: white; }
+    .section.dark .inner { max-width: 1100px; margin: auto; }
+    .section-heading { margin-bottom: 2rem; }
+    .kicker { color: #9a6b10; text-transform: uppercase; letter-spacing: .15em; font-weight: 900; font-size: .75rem; }
+    .dark .kicker { color: var(--gold); }
+    h2 { font-size: clamp(2rem, 4.4vw, 3.25rem); line-height: 1.15; letter-spacing: -.035em; margin: .45rem 0 1rem; }
+    .lead { max-width: 760px; color: var(--muted); font-size: 1.08rem; }
+    .dark .lead { color: #c9cde5; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1.15rem; }
+    .card {
+      background: white; border: 1px solid #ece8df; border-radius: 1.3rem; padding: 1.5rem;
+      box-shadow: 0 12px 35px rgba(27,36,80,.055); transition: transform .25s, box-shadow .25s;
+    }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 18px 42px rgba(27,36,80,.1); }
+    .card h3 { margin: .2rem 0 .6rem; font-size: 1.25rem; }
+    .card p { color: var(--muted); margin: 0; }
+    .icon { width: 3rem; height: 3rem; display: grid; place-items: center; border-radius: 1rem; background: #fff0d0; font-size: 1.55rem; margin-bottom: 1rem; }
+    .timeline { display: grid; gap: 1rem; max-width: 820px; }
+    .timeline-item { display: grid; grid-template-columns: 3.2rem 1fr; gap: 1rem; align-items: start; }
+    .timeline-dot { width: 3rem; height: 3rem; display: grid; place-items: center; border-radius: 50%; background: rgba(244,198,106,.15); border: 1px solid rgba(244,198,106,.35); font-size: 1.25rem; }
+    .timeline-copy { padding: .25rem 0 1.15rem; border-bottom: 1px solid var(--line); }
+    .timeline-copy h3 { margin: 0 0 .3rem; }
+    .timeline-copy p { margin: 0; color: #c9cde5; }
+    .quote {
+      margin: 1.5rem 0 0; padding: 1.4rem 1.5rem; border-left: 4px solid var(--gold);
+      background: rgba(255,255,255,.07); border-radius: 0 1rem 1rem 0; font-size: 1.12rem; color: #fff7e5;
+    }
+    .dream-panel {
+      color: white; border-radius: 1.7rem; padding: clamp(1.5rem, 4vw, 3rem);
+      background: linear-gradient(135deg, #29336d, #5a3d78 60%, #8a526b);
+      position: relative; overflow: hidden;
+    }
+    .dream-panel::after { content: "✧"; position: absolute; right: 5%; top: -2rem; font-size: 11rem; color: rgba(255,255,255,.09); }
+    .dream-panel p { max-width: 760px; color: #f3efff; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.3rem; }
+    .tag { padding: .45rem .8rem; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; font-size: .9rem; background: rgba(255,255,255,.08); }
+    .note { font-size: .88rem; color: var(--muted); }
+    footer { background: #0a0e22; color: #c8cce2; text-align: center; padding: 2.5rem 1.2rem; }
+    footer strong { color: var(--gold); }
+    .top-link { display: inline-block; margin-top: .8rem; color: var(--mint); text-decoration: none; }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @keyframes rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes float { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-15px) rotate(3deg); } }
+    @media (max-width: 780px) {
+      .hero { min-height: 84vh; padding-top: 4.5rem; padding-bottom: 4rem; }
+      .orbit { width: 190px; right: -50px; top: 8%; opacity: .55; }
+      .grid { grid-template-columns: 1fr; }
+      nav { gap: .1rem; }
+      nav a { font-size: .78rem; padding: .4rem .5rem; }
+      .section { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="hero">
+    <div class="stars"></div>
+    <div class="orbit" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="eyebrow">One life • Many lessons • Endless possibility</div>
+      <h1>The World<br>of <span>Khalifa</span></h1>
+      <p class="hero-subtitle">My Life, My Dreams, and My Story with Aisha. ❤️🌍</p>
+      <p class="hero-subtitle">A personal journey from a small community in Kano, Nigeria, toward knowledge, creativity, technology, and a future built one step at a time.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#my-story">Explore my story ↓</a>
+        <a class="button secondary" href="#my-dreams">My dreams ✨</a>
+      </div>
+    </div>
+  </header>
+
+  <nav aria-label="Main navigation">
+    <a href="#my-story">My Story</a>
+    <a href="#education">Education</a>
+    <a href="#interests">My Interests</a>
+    <a href="#world-origins">World Origins</a>
+    <a href="#daily-life">Daily Life</a>
+    <a href="#english">English</a>
+    <a href="#aisha">Aisha</a>
+    <a href="#my-dreams">Dreams</a>
+  </nav>
+
+  <main>
+    <section class="section" id="my-story">
+      <div class="section-heading reveal">
+        <div class="kicker">Chapter 01 · Where it began</div>
+        <h2>My story starts in my neighbourhood.</h2>
+        <p class="lead">My name is Ibrahim Isah, though many know me as Khalifa. Raised in Kano State, Nigeria, this is my story—a journey of continuous learning, resilience, and growth.</p>
+      </div>
+      <div class="grid">
+        <article class="card reveal">
+          <div class="icon">🏡</div>
+          <h3>My roots</h3>
+          <p>The neighbourhood where I grew up is where I attended school. My background has shaped the way I see life, hard work, and the value of every opportunity.</p>
+        </article>
+        <article class="card reveal">
+          <div class="icon">🌱</div>
+          <h3>Still growing</h3>
+          <p>I am still learning about myself and the world. I believe that a difficult chapter does not have to be the end of a person's story.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section dark" id="education">
+      <div class="inner">
+        <div class="section-heading reveal">
+          <div class="kicker">Chapter 02 · Lessons and challenges</div>
+          <h2>My education journey</h2>
+          <p class="lead">I attended primary and secondary school in my community. Because of difficult circumstances in life, I could not complete secondary school. That was a challenge, but it did not end my curiosity or my desire to learn.</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item reveal">
+            <div class="timeline-dot">📚</div>
+            <div class="timeline-copy"><h3>School days</h3><p>I began my education in my neighbourhood, where I attended primary and secondary school.</p></div>
+          </div>
+          <div class="timeline-item reveal">
+            <div class="timeline-dot">⚡</div>
+            <div class="timeline-copy"><h3>A dream of engineering</h3><p>I hoped to study electrical and electronics engineering. I spent time learning about the field, even though circumstances made it difficult to continue through the usual path.</p></div>
+          </div>
+          <div class="timeline-item reveal">
+            <div class="timeline-dot">🌟</div>
+            <div class="timeline-copy"><h3>Learning beyond the classroom</h3><p>I continue to explore ideas, research topics, and teach myself new skills with the tools available to me.</p></div>
+          </div>
+        </div>
+        <div class="quote reveal">“My path has not been easy, but I still have the chance to learn, create, and move forward.”</div>
+      </div>
+    </section>
+
+    <section class="section" id="interests">
+      <div class="section-heading reveal">
+        <div class="kicker">Chapter 03 · Curiosity</div>
+        <h2>The things that make me curious</h2>
+        <p class="lead">I enjoy learning about how the universe works and discovering what technology can make possible.</p>
+      </div>
+      <div class="grid">
+        <article class="card reveal"><div class="icon">🔭</div><h3>Physics and astronomy</h3><p>I enjoy exploring physics, space, and astronomy. These subjects keep me asking questions about the universe and how things work.</p></article>
+        <article class="card reveal"><div class="icon">🎨</div><h3>Photo and video editing</h3><p>I like working with images and video, experimenting with visual ideas, and turning information into content people can enjoy.</p></article>
+        <article class="card reveal"><div class="icon">💻</div><h3>Technology</h3><p>I am interested in digital tools, websites, and the ways technology can help people share ideas and solve problems.</p></article>
+        <article class="card reveal"><div class="icon">🧠</div><h3>Self-learning</h3><p>I believe learning can continue outside a classroom. A phone or computer can become a doorway to new knowledge when used with patience and purpose.</p></article>
+      </div>
+    </section>
+
+    <section class="section dark" id="world-origins">
+      <div class="inner">
+        <div class="section-heading reveal">
+          <div class="kicker">Chapter 04 · Creating something of my own</div>
+          <h2>My journey with World Origins 🌍</h2>
+          <p class="lead">I began thinking about creating videos. At first, I considered making content about electrical and electronics topics. Later, I chose a wider idea: sharing interesting things about the world. That idea became <strong>World Origins</strong>.</p>
+        </div>
+        <div class="grid">
+          <article class="card reveal"><div class="icon">🌎</div><h3>A world of discoveries</h3><p>World Origins shares short educational videos about places, people, brands, landmarks, inventions, and other interesting facts from around the world.</p></article>
+          <article class="card reveal"><div class="icon">📱</div><h3>Four platforms</h3><p>I share my work on Facebook, TikTok, Instagram, and YouTube, learning as I create and paying attention to what viewers enjoy.</p></article>
+        </div>
+        <div class="quote reveal">One of my proudest moments was seeing a video project grow beyond what I had imagined. As I understood TikTok's monetisation requirements at the time, I needed to reach 10,000 followers and 100,000 video views within 30 days. Within those 28 days, I achieved those targets—and went far beyond them. My account grew to approximately <strong>11,000 followers and 4.5 million video views</strong>. I was incredibly happy and hoped this achievement could help me move closer to my dreams.</div>
+        <p class="note" style="color:#c9cde5;margin-top:1rem;">However, when I tried to complete the identity verification needed to access monetisation, I encountered difficulties because I did not have the accepted identification documents required at that time. It was disappointing, but the skills and experience I gained through World Origins still have value. My journey did not end there; I continued looking for new ways to learn, create, and build a better future.</p>
+      </div>
+    </section>
+
+    <section class="section" id="daily-life">
+      <div class="section-heading reveal">
+        <div class="kicker">Chapter 05 · Everyday effort</div>
+        <h2>My family and daily life</h2>
+        <p class="lead">I am the youngest in my household. The people around me have followed different paths of education and work, and their efforts are part of the world I come from.</p>
+      </div>
+      <div class="grid">
+        <article class="card reveal"><div class="icon">🤝</div><h3>Working and helping</h3><p>Sometimes I join my older brother in road asphalt and concrete work. The money I earn helps with everyday needs such as phone credit, mobile data, and other small expenses.</p></article>
+        <article class="card reveal"><div class="icon">🧰</div><h3>Learning from family</h3><p>One of my older brothers works with industrial machines, and one of my older sisters teaches religious studies. Seeing different kinds of work reminds me that everyone has a role to play.</p></article>
+      </div>
+    </section>
+
+    <section class="section dark" id="web-development">
+      <div class="inner">
+        <div class="section-heading reveal">
+          <div class="kicker">Chapter 06 · A new skill</div>
+          <h2>Discovering web development</h2>
+          <p class="lead">After facing difficulties with online creator earnings, I began exploring web development on my own. Without a personal teacher guiding every step, I started researching, experimenting, and learning how websites are made.</p>
+        </div>
+        <div class="dream-panel reveal">
+          <h3 style="font-size:1.6rem;margin-top:0;">From an idea to a website</h3>
+          <p>​I have already learned how to build websites, and I am continuing to improve my skills. Creating a special website for someone very important to me was a way to show love, care, and appreciation ❤️, while learning how technology can be used to tell a story. </p>
+          <div class="tag-row"><span class="tag">Web development</span><span class="tag">Creative design</span><span class="tag">Problem-solving</span><span class="tag">Self-learning</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="english">
+      <div class="section-heading reveal">
+        <div class="kicker">Chapter 07 · Finding my voice</div>
+        <h2>My journey with English</h2>
+        <p class="lead">I can write in English, but speaking and understanding spoken English can be difficult for me. I am practising step by step because I want to understand my friends, reply with confidence, and communicate more naturally.</p>
+      </div>
+      <div class="grid">
+        <article class="card reveal"><div class="icon">🎧</div><h3>Listening and speaking</h3><p>I practise with beginner-friendly lessons, listen carefully, repeat useful expressions, and work on speaking without rushing myself.</p></article>
+        <article class="card reveal"><div class="icon">📝</div><h3>Small steps count</h3><p>I know that progress takes time. Each new word, conversation, and practice session is another step toward my goal.</p></article>
+      </div>
+    </section>
+
+    <section class="section dark" id="aisha">
+      <div class="inner">
+        <div class="section-heading reveal">
+          <div class="kicker">Chapter 08 · A meaningful friendship</div>
+          <h2>My story with Aisha ❤️</h2>
+          <p class="lead">I first noticed Aisha's messages in an English-learning WhatsApp group on 5 October 2026. On 6 October, I started a conversation with her. I was happy with the way she welcomed me with kindness and respect, and I felt grateful to have found someone I could talk with and learn from.</p>
+        </div>
+        <div class="grid">
+          <article class="card reveal"><div class="icon">💬</div><h3>A kind beginning</h3><p>Our conversations became meaningful to me. I appreciated her character and the kindness she showed me, and I was glad our paths had crossed.</p></article>
+          <article class="card reveal"><div class="icon">🤲</div><h3>Prayers from the heart</h3><p>When I learned that Aisha was going through a difficult time, I sincerely wished for her wellbeing. For three consecutive days, I woke at around 3:00 a.m. and prayed to Allah to ease her difficulties, protect her, and guide her toward better days.</p></article>
+        </div>
+        <div class="quote reveal">Aisha, you were never a burden to me because you shared your feelings. I hope you never feel that you must hide your worries to protect someone else's feelings. You deserve to be heard, supported, and treated with kindness.</div>
+        <p class="note" style="color:#c9cde5;margin-top:1rem;">I know I cannot solve every problem for someone else, but I can listen when appropriate, offer encouragement, and pray for good things. My hope is that Aisha will keep believing that difficult moments do not define her whole life, and that she can seek support whenever she needs it.</p>
+      </div>
+    </section>
+
+    <section class="section" id="my-dreams">
+      <div class="section-heading reveal">
+        <div class="kicker">Chapter 09 · The road ahead</div>
+        <h2>My dreams are still growing.</h2>
+        <p class="lead">I do not have every answer yet, and I am still discovering what is possible. What I know is that I want to keep learning, creating, and building a better future through the skills I develop.</p>
+      </div>
+      <div class="dream-panel reveal">
+        <h3 style="font-size:1.8rem;margin-top:0;">One step at a time. 🌱</h3>
+        <p>I want to continue improving my web development skills, grow World Origins, strengthen my English, and make the most of the opportunities I can reach. My circumstances are part of my story, but they do not have to decide every chapter that comes next.</p>
+        <div class="tag-row"><span class="tag">Keep learning</span><span class="tag">Build useful things</span><span class="tag">Create with purpose</span><span class="tag">Never stop asking questions</span></div>
+      </div>
+    </section>
+
+    <section class="section dark" id="final-message">
+      <div class="inner reveal" style="text-align:center;max-width:800px;">
+        <div class="kicker">A message from my heart</div>
+        <h2>My dear Aisha ❤️</h2>
+        <p class="lead" style="margin-left:auto;margin-right:auto;">I created this website especially for you because I wanted to share my story with you—not only the happy moments, but also the challenges that have shaped the person I am today.</p>
+        <p class="lead" style="margin-left:auto;margin-right:auto;">Life has not always gone the way I hoped. Some of my dreams have been delayed, and I have faced difficulties that forced me to find new ways forward. But I am still learning, still growing, and still hoping for a better future.</p>
+        <p class="lead" style="margin-left:auto;margin-right:auto;">There is one lesson I especially want you to take from my story: never allow a difficult moment to convince you that your whole life will always be difficult. When life becomes overwhelming, give yourself time, talk to someone you trust, ask for help when you need it, and keep making dua.</p>
+        <p class="lead" style="margin-left:auto;margin-right:auto;">Aisha, I want you to know that you can share your feelings without being afraid that you will disappoint me. You do not have to pretend that everything is fine when it is not. I may not always have the answers, but I sincerely wish you peace, happiness, and a future filled with good opportunities.</p>
+        <p class="lead" style="margin-left:auto;margin-right:auto;">I care about you deeply, and I pray that Allah guides you, protects you, and brings ease into your life. Please keep learning, discover the things that bring you peace and healthy happiness, and keep giving yourself the opportunity to experience better days.</p>
+        <p class="lead" style="margin-left:auto;margin-right:auto;">You deserve kindness, support, and the chance to build a future you can look forward to. A difficult chapter is not the end of your story.</p>
+        <p style="font-size:1.25rem;color:#fff2d2;font-weight:700;">With love, sincere care, and prayers for your happiness,<br>Ibrahim Isah — Khalifa ❤️🌍</p>
+        <a class="button primary" href="#top">Back to the beginning ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>The World of Khalifa</strong> · My Life, My Dreams, and My Story with Aisha</p>
+    <p>Made with curiosity, hope, and a love of learning. ❤️🌍</p>
+    <a class="top-link" href="#top">Return to top</a>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+  </script>
+</body>
+</html>
